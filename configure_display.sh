@@ -27,7 +27,15 @@ xrandr --newmode $MODE_NAME $cvt_configs
 # list monitors to select from
 x_mon_out=$(xrandr --listmonitors)
 
-avail_monitors=$(xrandr --listmonitors | cut -d$'\n' -f2-)
+SAVEIFS=$IFS
+IFS=$'\n'
+avail_monitors=($(xrandr --listmonitors))
+IFS=$SAVEIFS
+
+# remove first element
+unset avail_monitors[0]
+
+echo $avail_monitors
 
 # just get names of available monitors
 for i in "${!avail_monitors[@]}"
