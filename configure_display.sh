@@ -32,7 +32,7 @@ avail_monitors=$(xrandr --listmonitors | cut -d' ' -f3- | cut -d$'\n' -f2-)
 # just get names of available monitors
 for i in "${!avail_monitors[@]}"
 do
-    avail_monitors[$i]=$(echo ${avail_monitors[$i]} | cut -d' ' -f3)
+    avail_monitors[$i]=$(echo ${avail_monitors[$i]} | rev | cut -d' ' -f1 | rev)
 done
 
 # ask user which display this is for
